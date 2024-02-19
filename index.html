@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencial SQL</title>
+   <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <button onclick="topFunction()" id="myBtn">↑</button>
+    <header>
+        <img src="imgs/logosql.png" alt="SQL Logo"> 
+        <h1>Referencial SQL</h1>
+      
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="#introducao">INTRODUÇÃO</a></li>
+            <li><a href="#tiposdedados">TIPOS DE DADOS</a></li>
+            <li><a href="#create-table">CREATE TABLE</a></li>
+            <li><a href="#insert">INSERT</a></li>
+            <li><a href="#update">UPDATE</a></li>
+            <li><a href="#select">SELECT</a></li>
+            <li><a href="#agregados">FUNÇÕES</a></li>
+            <li><a href="#delete">DELETE</a></li>
+            <li><a href="#alter-table">ALTER TABLE</a></li>
+            <li><a href="#join">JOIN</a></li>
+            <li><a href="#indices">ÍNDICES</a></li>
+            <li><a href="#views">VIEWS</a></li>
+        </ul>
+    </nav>
+
+    <section id="introducao">
+        <h2>Introdução</h2>
+        <p>Pretende-se com esta tarefa criar um referencial rápido, para consulta de comandos de SQL, sintaxe e exemplos práticos. <br>
+            O objetivo do trabalho é relembrar a matéria do ano anterior e criar um documento que possa servir como ferramenta pedagógica de ajuda à programação em SQL. <br>
+            </p>
+       </section>
+
+       <section>
+        <h2>SQL</h2>
+        <p>SQL, que significa Structured Query Language (Linguagem de Consulta Estruturada), é uma linguagem de programação utilizada para gerir e manipular bases de dados. <br> É particularmente útil para tarefas como a consulta de dados, a criação e modificação de estruturas de bases de dados e o controlo do acesso aos dados armazenados nas bases de dados.
+            </p>
+       </section>
+
+       <section>
+        <h2>phpMyAdmin</h2>
+        <p>O phpMyAdmin é uma ferramenta de administração gratuita e de código aberto para bases de dados MySQL e MariaDB, escrita em PHP, que foi criada por Tobias Ratschiller em 1998. A ferramenta tornou-se uma das ferramentas de administração MySQL mais populares, especialmente para serviços de alojamento Web. Em 2001, um grupo de três programadores registou o projeto phpMyAdmin no SourceForge e assumiu o desenvolvimento. Desde então, o software passou por várias atualizações e melhorias, incluindo a utilização de Ajax para melhorar a usabilidade. Com o phpMyAdmin, é possível executar a maioria das tarefas de administração, incluindo a criação de uma base de dados e a execução de consultas.</p>
+        <p>Algumas das características do phpMyAdmin incluem a capacidade de criar, editar e eliminar bases de dados, tabelas, vistas, colunas e índices. Também pode apresentar vários conjuntos de resultados através de procedimentos armazenados ou consultas, criar, copiar, eliminar, renomear e alterar bases de dados, tabelas, colunas e índices, e executar e editar qualquer instrução SQL.</p>
+        <p>Algumas das vantagens do phpMyAdmin incluem a sua interface de fácil utilização, que permite aos utilizadores gerir facilmente as suas bases de dados sem necessidade de quaisquer conhecimentos técnicos. Além disso, o phpMyAdmin fornece uma gama de funcionalidades, tais como cópia de segurança e restauro da base de dados, pesquisa de bases de dados e criação de consultas, o que pode poupar aos programadores uma quantidade significativa de tempo na gestão das suas bases de dados. É também altamente personalizável, com uma gama de temas e plugins disponíveis para melhorar a sua funcionalidade.</p>
+        <p>No entanto, uma das principais desvantagens da utilização do phpMyAdmin é a segurança. Sendo uma aplicação baseada na Web, o phpMyAdmin é vulnerável a ataques como a injeção de SQL e o cross-site scripting. Isto significa que se um atacante obtiver acesso à sua instalação do phpMyAdmin, pode potencialmente causar estragos na sua base de dados. Além disso, pode ser utilizado por alguém com intenções maliciosas para roubar dados ou comprometer a sua aplicação PHP. Por isso, é importante garantir que a sua instalação do phpMyAdmin está devidamente protegida e que está a monitorizá-la para detetar qualquer atividade suspeita.</p>
+        <p>Existem várias alternativas ao phpMyAdmin para gerir bases de dados MySQL. Uma opção popular é o Adminer, que é uma ferramenta de gestão de bases de dados leve e fácil de utilizar. Outra opção é o Sequel Pro, que é uma ferramenta apenas para Mac que oferece uma variedade de funcionalidades poderosas para gerir bases de dados MySQL. Adicionalmente, alguns programadores podem optar por utilizar ferramentas de linha de comandos como o MySQL Workbench ou o pgAdmin, que proporcionam uma abordagem mais prática à gestão de bases de dados.</p>
+       </section>
+
+       <!-- Tipos de Dados -->
+       <section id="tiposdedados">
+        <h2>Tipos de Dados</h2>
+        <p>O SQL suporta vários tipos de dados para armazenar informações em tabelas. Abaixo estão alguns dos tipos de dados mais comuns:</p>
+        <ul>
+            <li><strong>INT:</strong> Armazena números inteiros. Ex: 10, -25, 0.</li>
+            <li><strong>VARCHAR(n):</strong> Armazena strings de tamanho variável, com um limite máximo de caracteres definido por 'n'. Ex: VARCHAR(255), VARCHAR(50).</li>
+            <li><strong>CHAR(n):</strong> Armazena strings de tamanho fixo, com um limite máximo de caracteres definido por 'n'. Ex: CHAR(10), CHAR(20).</li>
+            <li><strong>TEXT:</strong> Armazena strings de texto longo. Adequado para textos extensos como descrições. Não tem limite definido.</li>
+            <li><strong>DATE:</strong> Armazena uma data no formato 'YYYY-MM-DD'. Ex: '2024-02-16'.</li>
+            <li><strong>DATETIME:</strong> Armazena data e hora no formato 'YYYY-MM-DD HH:MM:SS'. Ex: '2024-02-16 14:30:00'.</li>
+            <li><strong>BOOL ou BOOLEAN:</strong> Armazena valores booleanos (verdadeiro ou falso). Também podem ser representados como 0 para falso e 1 para verdadeiro.</li>
+            <li><strong>FLOAT:</strong> Armazena números decimais de precisão simples.</li>
+            <li><strong>DOUBLE:</strong> Armazena números decimais de dupla precisão, com mais precisão que FLOAT.</li>
+        </ul>
+        <p>Estes são apenas alguns dos tipos de dados suportados pelo SQL. A escolha do tipo de dados adequado depende dos requisitos específicos da sua base de dados e da aplicação que está a ser desenvolvida.</p>
+    </section>
+    
+
+     <!-- Criar Tabela -->
+     <section id="create-table">
+        <h2>CREATE TABLE</h2>
+        <p>Este comando é utilizado para criar uma nova tabela na base de dados.</p>
+        <code>
+                CREATE TABLE nome_tabela ( <br>
+                coluna1 tipo_dados restrições, <br>
+                coluna2 tipo_dados restrições, <br>
+                ... <br>
+            );
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            CREATE TABLE funcionarios ( <br>
+                id_funcionario INT PRIMARY KEY, <br>
+                primeiro_nome VARCHAR(50), <br>
+                ultimo_nome VARCHAR(50) <br>
+            );
+          </code>
+          
+ 
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/1.png" alt=""></section>
+
+
+
+    <!-- Inserir Valores -->
+    <section id="insert">
+        <h2>INSERT INTO</h2>
+        <p>Este comando é utilizado para inserir novos registos numa tabela.</p>
+        <code>
+        INSERT INTO nome_tabela (coluna1, coluna2, coluna3, ...) <br>
+            VALUES (valor1, valor2, valor3, ...);
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            INSERT INTO funcionarios (id_funcionario, primeiro_nome, ultimo_nome) <br>
+            VALUES (1, 'João', 'Silva');
+        </code>
+        <p>Resultado: Adiciona um novo registo com id_funcionario 1, primeiro_nome 'João' e ultimo_nome 'Silva' na tabela de funcionarios.</p>
+
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/2.png" alt=""></section>
+
+    <!-- Atualizar -->
+    <section id="update">
+        <h2>UPDATE</h2>
+        <p>Este comando é utilizado para modificar registos existentes numa tabela.</p>
+        <code>
+            UPDATE nome_tabela <br>
+            SET coluna1 = valor1, coluna2 = valor2, ... <br>
+            WHERE condição;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            UPDATE funcionarios <br>
+            SET primeiro_nome = 'Maria' <br>
+            WHERE id_funcionario = 1;
+        </code>
+        <p>Resultado: Atualiza o primeiro_nome para 'Maria' para o funcionário com id_funcionario 1 na tabela de funcionarios.</p>
+  
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/3.png" alt=""></section>
+
+    <!-- Selecionar -->
+    <section id="select">
+        <h2>SELECT</h2>
+        <p>Este comando é utilizado para recuperar dados de uma ou mais tabelas.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios;
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/4.png" alt=""></section>
+
+    <!-- Selecionar Onde -->
+    <section>
+        <h2>SELECT (...) WHERE</h2>
+        <p>Este comando recupera registos com base em condições específicas.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE condição;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE departamento = 'Vendas';
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento é 'Vendas'.</p>
+    
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/5.png" alt=""></section>
+
+    <!-- Selecionar Onde Não -->
+    <section>
+        <h2>SELECT (...) WHERE NOT</h2>
+        <p>Este comando recupera registos exceto aqueles que satisfazem a condição especificada.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE NOT condição;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE NOT departamento = 'RH';
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento não é 'RH'.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/6.png" alt=""></section>
+
+    <!-- Selecionar Onde E -->
+    <section>
+        <h2>SELECT (...) WHERE (...) AND</h2>
+        <p>Este comando recupera registos que satisfazem múltiplas condições.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE condição1 AND condição2;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE departamento = 'Vendas' AND salario > 50000;
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento é 'Vendas' e o salário é superior a 50000.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/7.png" alt=""></section>
+
+    <!-- Selecionar Onde Entre -->
+    <section>
+        <h2>SELECT (...) WHERE (...) BETWEEN</h2>
+        <p>Este comando recupera registos onde um valor se encontra dentro de um intervalo especificado.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE coluna BETWEEN valor1 AND valor2;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE salario BETWEEN 40000 AND 60000;
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o salário está entre 40000 e 60000.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/8.png" alt=""></section>
+
+    <!-- Selecionar Onde Não Entre -->
+    <section>
+        <h2>SELECT (...) WHERE (...) NOT BETWEEN</h2>
+        <p>Este comando recupera registos onde um valor se encontra fora de um intervalo especificado.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE coluna NOT BETWEEN valor1 AND valor2;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE idade NOT BETWEEN 25 AND 35;
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde a idade não está entre 25 e 35 anos.</p>
+    
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/9.png" alt=""></section>
+
+    <!-- Selecionar Onde Ou -->
+    <section>
+        <h2>SELECT (...) WHERE (...) OR</h2>
+        <p>Este comando recupera registos onde pelo menos uma condição é satisfeita.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE condição1 OR condição2;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE departamento = 'Vendas' OR departamento = 'Marketing';
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento é 'Vendas' ou 'Marketing'.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/10.png" alt=""></section>
+
+    <!-- Selecionar Onde Em -->
+    <section>
+        <h2>SELECT (...) WHERE (...) IN</h2>
+        <p>Este comando recupera registos onde um valor corresponde a qualquer um dos valores de numa lista.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE coluna IN (valor1, valor2, ...);
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE departamento IN ('Vendas', 'Marketing');
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento é 'Vendas' ou 'Marketing'.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/11.png" alt=""></section>
+
+    <!-- Selecionar Onde diferente -->
+    <section>
+        <h2>SELECT (...) WHERE (...) <></h2>
+        <p>Este comando recupera registos onde um valor é diferente do valor mencionado.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE coluna <> valor;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE departamento <> 'Vendas';
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento é diferente de 'Vendas'.</p>
+    
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/12.png" alt=""></section>
+
+    <!-- Selecionar Onde Não Em -->
+    <section>
+        <h2>SELECT (...) NOT IN</h2>
+        <p>Este comando recupera registos onde um valor não corresponde a qualquer valor numa lista.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE coluna NOT IN (valor1, valor2, ...);
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE departamento NOT IN ('RH', 'Financeiro');
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o departamento não é 'RH' ou 'Financeiro'.</p>
+  
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/13.png" alt=""></section>
+
+   
+
+    <!-- Selecionar Onde Como Com -->
+    <section>
+        <h2>SELECT (...) LIKE *</h2>
+        <p>Este comando recupera registos onde um valor corresponde a um padrão especificado.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            WHERE coluna LIKE '*resto';
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            WHERE primeiro_nome LIKE '*ra';
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios onde o primeiro nome termina com 'ra'.</p>
+    
+
+    <h4>Resultado:</h4><img width="40%" src="imgs/14.png" alt=""></section>
+
+    <!-- Selecionar Ordenar Por -->
+    <section>
+        <h2>SELECT (...) ORDER BY</h2>
+        <p>Este comando recupera registos ordenados por ordem crescente ou decrescente.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            ORDER BY coluna1 [ASC|DESC];
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            ORDER BY salario; <br>
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios ordenados por salário em ordem crescente.</p>
+   
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/15.png" alt=""></section>
+
+    <!-- Selecionar Ordenar Por Desc -->
+    <section>
+        <h2>SELECT (...) ORDER BY (...) DESC</h2>
+        <p>Este comando recupera registos ordenados por ordem decrescente.</p>
+        <code>
+            SELECT coluna1, coluna2, ... <br>
+            FROM nome_tabela <br>
+            ORDER BY coluna1 DESC;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT * <br>
+            FROM funcionarios <br>
+            ORDER BY salario DESC;
+        </code>
+        <p>Resultado: Recupera todos os registos da tabela de funcionarios ordenados por salário em ordem decrescente.</p>
+  
+
+    <h4>Resultado:</h4><img width="50%" src="imgs/16.png" alt=""></section>
+
+    <!-- Selecionar Colunas com Aliases e Cálculos -->
+    <section>
+        <h2>SELECT com cálculos e alcunhas</h2>
+        <p>Este comando recupera colunas específicas com alcunhas e cálculos.</p>
+        <code>
+            SELECT coluna1 AS alcunha1, CONCAT(coluna2, ' ', coluna3) AS alcunha2, coluna4 * 0.1 AS alcunha3 <br>
+            FROM nome_tabela;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            SELECT id_funcionario AS id, CONCAT(primeiro_nome, ' ', ultimo_nome) AS nomecompleto, salario * 0.1 AS taxa <br>
+            FROM funcionarios;
+        </code>
+        <p>Resultado: Recupera id_funcionario como id, concatena primeiro_nome e ultimo_nome como nome_completo e calcula 10% do salario como imposto para cada registo.</p>
+   
+
+    <h4>Resultado:</h4><img width="30%" src="imgs/17.png" alt=""></section>
+
+    <!-- Selecionar Agregados -->
+    <section id="agregados">
+        <h2>SUM, MAX, MIN, AVG, COUNT</h2>
+        <p>Este comando calcula valores agregados de uma coluna.</p>
+        <code>
+            SELECT FUNÇÃO(coluna1)
+            FROM nome_tabela;
+        </code>
+        <p>Exemplos:</p>
+        <code>
+            SELECT SUM(salario) FROM funcionarios;
+        </code><br>
+        <code>
+            SELECT MAX(salario) FROM funcionarios;
+        </code><br>
+        <code>
+            SELECT MIN(salario) FROM funcionarios;
+        </code><br>
+        <code>
+            SELECT AVG(salario) FROM funcionarios;
+        </code><br>
+        <code>
+            SELECT COUNT(*) FROM funcionarios;
+        </code>
+        <p>Resultados: Calcula soma, máximo, mínimo, média e contagem dos salários na tabela de funcionarios.</p>
+   
+
+    <h4>Resultado:</h4>
+    <img width="12%" src="imgs/18-5.png" alt="">
+    <img width="15%" src="imgs/18-1.png" alt="">
+    <img width="15%" src="imgs/18-2.png" alt="">
+    <img width="15%" src="imgs/18-3.png" alt="">
+    <img width="15%" src="imgs/18-4.png" alt=""></section>
+   
+
+    <!-- Apagar registros -->
+    <section id="delete">
+        <h2>DELETE</h2>
+        <p>Este comando apaga registros de uma tabela baseado numa condição específica.</p>
+        <code>
+            DELETE FROM nome_tabela <br>
+            WHERE condição;
+        </code>
+        <p>Exemplo:</p>
+        <code>
+            DELETE FROM funcionarios <br>
+            WHERE salario < 1000;
+        </code>
+        <p>Resultado: Apaga todos os registros da tabela de funcionários onde o salário é inferior a 1000.</p>
+        <h4>Resultado:</h4>
+        <img width="30%" src="imgs/26.png" alt="">
+    </section>
+    
+    
+
+     <!-- Alterar Tabela: Adicionar Coluna -->
+     <section id="alter-table">
+    <h2>ALTER TABLE ADD</h2>
+    <p>Este comando é utilizado para adicionar uma nova coluna a uma tabela existente.</p>
+    <code>
+        ALTER TABLE nome_tabela <br>
+        ADD nova_coluna tipo_dados restricões;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        ALTER TABLE funcionarios <br>
+        ADD email VARCHAR(100);
+    </code>
+    <p>Resultado: Adiciona uma nova coluna chamada email à tabela de funcionarios.</p>
+
+
+<h4>Resultado:</h4><img width="50%" src="imgs/19.png" alt=""></section>
+
+<!-- Alterar Tabela: Remover Coluna -->
+<section>
+    <h2>ALTER TABLE DROP</h2>
+    <p>Este comando é utilizado para remover uma coluna de uma tabela existente.</p>
+    <code>
+        ALTER TABLE nome_tabela <br>
+        DROP nome_coluna;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        ALTER TABLE funcionarios <br>
+        DROP email;
+    </code>
+    <p>Resultado: Remove a coluna email da tabela de funcionarios.</p>
+
+
+<h4>Resultado:</h4><img width="50%" src="imgs/20.png" alt=""></section>
+
+<!-- Alterar Tabela: Renomear Coluna -->
+<section>
+    <h2>ALTER TABLE RENAME coluna</h2>
+    <p>Este comando é utilizado para renomear uma coluna de uma tabela existente.</p>
+    <code>
+        ALTER TABLE nome_tabela <br>
+        CHANGE nome_coluna_antiga nome_coluna_nova tipodados;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        ALTER TABLE funcionarios  <br>
+        CHANGE primeiro_nome nome varchar(50);
+    </code>
+    <p>Resultado: Renomeia a coluna primeiro_nome para nome na tabela de funcionarios.</p>
+
+
+<h4>Resultado:</h4><img width="50%" src="imgs/21.png" alt=""></section>
+
+<!-- Junção -->
+<section id="join">
+    <h2>INNER JOIN</h2>
+    <p>Este comando recupera dados de múltiplas tabelas com base numa coluna relacionada.</p>
+    <code>
+        SELECT tabela1.coluna1, tabela2.coluna2 <br>
+        FROM tabela1 <br>
+        INNER JOIN tabela2 ON tabela1.colunaX = tabela2.colunaY;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        SELECT pedidos.id_pedido, clientes.nome_cliente <br>
+        FROM pedidos <br>
+        INNER JOIN clientes ON pedidos.id_cliente = clientes.id_cliente;
+    </code>
+    <p>Resultado: Recupera id_pedido de pedidos e nome_cliente de clientes onde id_cliente corresponde entre as duas tabelas usando INNER JOIN.</p>
+
+
+<h4>Resultado:</h4><img width="15%" src="imgs/22.png" alt=""></section>
+
+<!-- Junção à esquerda -->
+<section>
+    <h2>LEFT [ OUTER ] JOIN</h2>
+    <p>Este comando recupera todos os registros da tabela à esquerda e os registros correspondentes da tabela à direita. Se não houver correspondência, o resultado é NULL do lado direito.</p>
+    <code>
+        SELECT tabela1.coluna1, tabela2.coluna2 <br>
+        FROM tabela1 <br>
+        LEFT JOIN tabela2 ON tabela1.colunaX = tabela2.colunaY;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        SELECT pedidos.id_pedido, clientes.nome_cliente <br>
+        FROM pedidos <br>
+        LEFT JOIN clientes ON pedidos.id_cliente = clientes.id_cliente;
+    </code>
+    <p>Resultado: Recupera id_pedido de pedidos e nome_cliente de clientes onde id_cliente corresponde entre as duas tabelas usando LEFT JOIN.</p>
+
+
+<h4>Resultado:</h4><img width="15%" src="imgs/22.png" alt=""></section>
+
+<!-- Junção à direita -->
+<section>
+    <h2>RIGHT [ OUTER ] JOIN</h2>
+    <p>Este comando recupera todos os registros da tabela à direita e os registros correspondentes da tabela à esquerda. Se não houver correspondência, o resultado é NULL do lado esquerdo.</p>
+    <code> 
+        SELECT tabela1.coluna1, tabela2.coluna2 <br>
+        FROM tabela1 <br>
+        RIGHT JOIN tabela2 ON tabela1.colunaX = tabela2.colunaY;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        SELECT pedidos.id_pedido, clientes.nome_cliente <br>
+        FROM pedidos <br>
+        RIGHT JOIN clientes ON pedidos.id_cliente = clientes.id_cliente;
+    </code>
+    <p>Resultado: Recupera id_pedido de pedidos e nome_cliente de clientes onde id_cliente corresponde entre as duas tabelas usando RIGHT JOIN.</p>
+
+
+<h4>Resultado:</h4><img width="15%" src="imgs/22.png" alt=""></section>
+
+<!-- Junção completa -->
+<section>
+    <h2>FULL [ OUTER ] JOIN</h2>
+    <p>Este comando recupera todos os registros quando há uma correspondência em qualquer uma das tabelas à esquerda ou à direita.</p>
+    <code>
+        SELECT tabela1.coluna1, tabela2.coluna2 <br>
+        FROM tabela1 <br>
+        FULL JOIN tabela2 ON tabela1.colunaX = tabela2.colunaY;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        SELECT pedidos.id_pedido, clientes.nome_cliente <br>
+        FROM pedidos <br>
+        FULL JOIN clientes ON pedidos.id_cliente = clientes.id_cliente;
+    </code>
+    <p>Resultado: Recupera id_pedido de pedidos e nome_cliente de clientes onde id_cliente corresponde entre as duas tabelas usando FULL JOIN.</p>
+
+
+<h4>Resultado:</h4><img width="15%" src="imgs/22.png" alt=""></section>
+
+<!-- Junção cruzada -->
+<section>
+    <h2>CROSS JOIN</h2>
+    <p>Este comando combina cada linha da primeira tabela com cada linha da segunda tabela.</p>
+    <code>
+        SELECT tabela1.coluna1, tabela2.coluna2 <br>
+        FROM tabela1 <br>
+        CROSS JOIN tabela2;
+    </code>
+    <p>Exemplo:</p>
+    <code>
+        SELECT pedidos.id_pedido, clientes.nome_cliente <br>
+        FROM pedidos <br>
+        CROSS JOIN clientes;
+    </code>
+    <p>Resultado: Combina cada id_pedido de pedidos com cada nome_cliente de clientes usando CROSS JOIN.</p>
+
+
+<h4>Resultado:</h4><img width="15%" src="imgs/22.png" alt=""></section>
+
+<section id="indices"><h2>Índices</h2>
+    <p>Um índice numa base de dados é semelhante a um índice num livro. É um ponteiro para dados numa tabela. Um índice numa base de dados é uma estrutura de dados que melhora a velocidade das operações de recuperação de dados numa tabela.</p>
+
+    <p>Por exemplo, vamos considerar uma tabela Alunos com colunas id, nome e idade. Se você quiser encontrar um aluno com id = 123, sem um índice, o software de base de dados deve analisar cada linha na tabela Alunos - um processo chamado "varredura completa da tabela". Se Alunos tiver milhões de linhas, isso poderia levar muito tempo. Mas com um índice na coluna id, a base de dados pode encontrar o aluno muito mais rapidamente.</p>
+
+    <p>Eis como criar um índice na coluna id da tabela Alunos:</p>
+    <code> 
+    CREATE INDEX idx_alunos_id <br>
+    ON Alunos (id); <br>
+    </code>
+
+    <p>Após criar este índice, quaisquer consultas que filtrem por id serão muito mais rápidas.</p>
+    <img width="50%" src="imgs/23.png" alt="">
+</section>
+
+
+<section id="views"><h2>Views</h2>
+    <p>Uma vista é uma tabela virtual baseada no conjunto de resultados de uma instrução SQL. Uma vista contém linhas e colunas, assim como uma tabela real. Os campos em uma vista são campos de uma ou mais tabelas reais na base de dados.</p>
+
+    <p>As vistas podem ser úteis para:</p>
+    <ul>
+        <li>Segurança: As vistas podem exibir colunas específicas da tabela com base na condição definida.</li>
+        <li>Simplicidade: Uma vista pode extrair dados de várias tabelas diferentes e apresentá-los como uma única tabela, transformando consultas de várias tabelas em visualizações de uma única tabela simples.</li>
+    </ul>
+
+    <p>Por exemplo, vamos considerar que temos duas tabelas: Encomendas e Clientes, e queremos criar uma vista que nos mostre todas as encomendas feitas por um cliente específico. Poderíamos criar uma vista assim:</p>
+    <code>
+    CREATE VIEW EncomendasCliente AS <br>
+    SELECT Encomendas.IDEncomenda, Clientes.NomeCliente, Encomendas.DataEncomenda <br>
+    FROM Encomendas <br>
+    INNER JOIN Clientes ON Encomendas.IDCliente = Clientes.IDCliente;
+    </code>
+    <div><h4>Resultado:</h4><img width="15%" src="imgs/24.png" alt=""></div>
+
+    <p>Agora, podemos consultar a view EncomendasCliente assim:</p>
+    <code>
+    SELECT * <br>
+    FROM EncomendasCliente <br>
+    WHERE NomeCliente='João Pedro';
+    </code>
+
+    <p>Isto irá devolver todas as encomendas feitas por João Pedro, combinando dados tanto das tabelas de Encomendas quanto de Clientes.</p>
+    <h4>Resultado:</h4><img width="35%" src="imgs/25.png" alt="">
+</section>
+
+<footer>
+    <div class="image-container">
+        <img src="imgs/logotipo_pessoas_rodape-transparente.png" alt="">
+        <img width="20%" src="imgs/logo_Colegio-Gaia-transparente.png" alt="">
+    </div>
+    <p>Trabalho realizado por Dinis Correia nº9 - 12ºITM1
+       
+        <br>No âmbito da disciplina de Implementação e Exploração de Bases de Dados
+        <br>Ano letivo 2023/2024
+    </p>
+
+   
+    
+</footer>
+
+<script>
+   
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElementById("myBtn").style.display = "none";
+      }
+    }
+    
+   
+    function topFunction() {
+      document.body.scrollTop = 0; 
+      document.documentElement.scrollTop = 0;
+    }
+    </script>
+    
+   
+
+</body>
+</html>
