@@ -1,4 +1,4 @@
-# Índice SQL
+# Indice SQL
 
 This project was developed by me as a tool for learning SQL commands.
 
